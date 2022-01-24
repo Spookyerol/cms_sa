@@ -1,0 +1,32 @@
+<form action="{% url 'CRM:post_client' %}" method="post">
+{% csrf_token %}
+<fieldset>
+    {% if client %}
+    <legend><h1>Edit client {{ client.cl_external_id }} {% if client.user %} associated with {{ client.user.username }} {% endif %}</h1></legend>
+    {% else %}
+    <legend><h1>Create new client</h1></legend>
+    {% endif %}
+    
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    
+    <label for="firstname">First name</label><br>
+    <input type="text" name="firstname" id="firstname" value="{{ client.firstname }}" required><br><br>
+    
+    <label for="lastname">Last name</label><br>
+    <input type="text" name="lastname" id="lastname" value="{{ client.lastname }}" required><br><br>
+    
+    <label for="email">Email</label><br>
+    <input type="text" name="email" id="email" value="{{ client.email }}"><br><br>
+    
+    <label for="company">Company</label><br>
+    <input type="text" name="company" id="company" value="{{ client.company }}"><br><br>
+    
+    <label for="cl_external_id">Client External ID</label><br>
+    <input type="text" name="cl_external_id" id="cl_external_id" value="{{ client.cl_external_id }}" required><br><br>
+</fieldset>
+{% if client %}
+<input type="submit" value="Add/Edit client">
+{% else %}
+<input type="submit" value="Add client">
+{% endif %}
+</form>

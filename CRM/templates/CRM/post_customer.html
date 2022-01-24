@@ -1,0 +1,31 @@
+{% if user %}
+<form action="{% url 'CRM:post_customer' user.username %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h1>Add customer associated with {{ user.username }}</h1></legend>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    
+    <label for="cs_first_name">First name</label><br>
+    <input type="text" name="cs_first_name" id="cs_first_name" required><br><br>
+    
+    <label for="cs_last_name">Last name</label><br>
+    <input type="text" name="cs_last_name" id="cs_last_name" required><br><br>
+    
+    <label for="cs_email">Email</label><br>
+    <input type="text" name="cs_email" id="cs_email" required><br><br>
+    
+    <label for="cs_country">Country</label><br>
+    <input type="text" name="cs_country" id="cs_country"><br><br>
+    
+    <label for="cs_company">Company</label><br>
+    <input type="text" name="cs_company" id="cs_company"><br><br>
+</fieldset>
+<input type="submit" value="Create customer">
+</form>
+{% else %}
+<p>No registered user to create customer for.</p>
+{% endif %}
+
+{% if customer_id %}
+<p>Warning: User {{ user.username }} already has a customer associated with them.</p>
+{% endif %}

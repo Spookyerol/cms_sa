@@ -1,0 +1,31 @@
+<h1>All Actions</h1>
+
+{% if user_list %}
+<ul>
+    <h3>Create customers for users</h3>
+    {% for user in user_list %}
+        <li><a href="{% url 'CRM:post_customer' user.username %}">Create customer for user {{ user.username }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>There are no registered users.</p>
+{% endif %}
+
+{% if customer_list %}
+<ul>
+    <h3>Edit existing customers</h3>
+    {% for customer in customer_list %}
+        <li><a href="{% url 'CRM:put_customer' customer.id %}">Edit customer for user {{ customer.user.username }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>There are no registered customers.</p>
+{% endif %}
+
+<ul>
+    <li><a href="{% url 'CRM:post_client' %}">Add/Edit client</a></li>
+</ul>
+
+<ul>
+    <li><a href="{% url 'CRM:post_invoice' %}">Post client invoice</a></li>
+</ul>

@@ -1,0 +1,34 @@
+{% if customer %}
+<form action="{% url 'CRM:put_customer' customer.id %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h1>Edit customer associated with {{ customer.user.username }}</h1></legend>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    
+    <label for="cs_first_name">First name</label><br>
+    <input type="text" name="cs_first_name" id="cs_first_name" value="{{ customer.cs_first_name }}" required><br><br>
+    
+    <label for="cs_last_name">Last name</label><br>
+    <input type="text" name="cs_last_name" id="cs_last_name" value="{{ customer.cs_last_name }}" required><br><br>
+    
+    <label for="cs_email">Email</label><br>
+    <input type="text" name="cs_email" id="cs_email" value="{{ customer.cs_email }}" required><br><br>
+    
+    <label for="cs_country">Country</label><br>
+    <input type="text" name="cs_country" id="cs_country" value="{{ customer.cs_country }}"><br><br>
+    
+    <label for="cs_company">Company</label><br>
+    <input type="text" name="cs_company" id="cs_company" value="{{ customer.cs_company }}"><br><br>
+    
+    <label for="cs_open_payment">Open Payment</label><br>
+    {% if customer.cs_open_payment %}
+    <input type="checkbox" name="cs_open_payment" id="cs_open_payment" checked><br><br>
+    {% else %}
+    <input type="checkbox" name="cs_open_payment" id="cs_open_payment"><br><br>
+    {% endif %}
+</fieldset>
+<input type="submit" value="Edit customer">
+</form>
+{% else %}
+<p>Selected user has no associated customer to edit. </p>
+{% endif %}

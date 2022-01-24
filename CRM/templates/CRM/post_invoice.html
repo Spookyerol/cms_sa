@@ -1,0 +1,21 @@
+<form action="{% url 'CRM:post_invoice' %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h1>Post Client Invoice</h1></legend>
+    
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    
+    <label for="invoice_external_id">External invoice ID</label><br>
+    <input type="text" name="invoice_external_id" id="invoice_external_id" value="{{ invoice.invoice_external_id }}" required><br><br>
+    
+    <label for="cl_external_id">External client ID</label><br>
+    <input type="text" name="cl_external_id" id="cl_external_id" required><br><br>
+    
+    <label for="amount">Amount</label><br>
+    <input type="text" name="amount" id="amount" value="{{ invoice.amount }}" required><br><br>
+    
+    <label for="currency">Currency</label><br>
+    <input type="text" name="currency" id="currency" required><br><br>
+</fieldset>
+<input type="submit" value="Post invoice">
+</form>
